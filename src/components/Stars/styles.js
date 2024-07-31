@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.button`
-    width: 100px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     display: flex;
     flex-direction: column;
     background: none;
@@ -10,7 +10,7 @@ export const Container = styled.button`
 
     > div {
         display: flex;
-        margin: 8px 0 15px;
-        gap: 2px;
+        align-items: center;
+        gap: 10px;
     }
 `;

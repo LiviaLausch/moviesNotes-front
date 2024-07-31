@@ -36,7 +36,7 @@ export const Form = styled.form`
             font-size: 36px;
         }
 
-        a {
+        button {
             display: flex;
             font-size: 16px;
             gap: 8px;

@@ -1,16 +1,57 @@
+import { useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
+
+import { api } from "../../services/api";
+import { useAuth } from "../../hooks/auth";
+
 import { FiPlus } from "react-icons/fi";
+import  avatarPlaceHolder  from "../../assets/avatar_placeholder.jpg"
 
-import { Container, Content, NewNote} from "./styles";
-
+import { Container, Content, Search, NewNote} from "./styles";
 import { Note } from "../../components/Note";
 import { Header } from "../../components/Header";
-import { Link } from "react-router-dom";
+import { Input } from "../../components/Input";
+import { FiSearch } from "react-icons/fi";
 
 export function Home(){
+    const [search, setSearch] = useState("");
+    const [tagsSelected, setTagsSelected] = useState([]);
+    const [notes, setNotes] = useState([]);
+    
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+
+    function handleDetails(id){
+        navigate(`/details/${id}`)
+    }
+
+    useEffect(() => {
+         async function fetchNotes(){
+            if(user) {
+                const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`);
+                setNotes(response.data);
+            }
+        }
+
+        fetchNotes();
+
+    }, [tagsSelected, search, user]);
+
+
     return(
         <Container>
             <Header/>
             <Content>
+
+            <Search>
+                <Input 
+                    placeholder="Pesquisar pelo título" 
+                    icon={FiSearch}
+                    onChange={(e) => setSearch(e.target.value)}
+                    />
+            </Search>
+
                 <div class="head-home">
                       <h1>Meus filmes</h1>
                         <NewNote to="/new">
@@ -19,32 +60,16 @@ export function Home(){
                         </NewNote>
                 </div>
 
-                
-                <Link to="/details">
-                    <Note data={{ 
-                            title: 'Divertidamente',
-
-                            description: 'Crescer pode ser um desafio, e não é exceção para Riley, que é arrancada da sua vida no Minnesota quando o pai arranja um novo emprego em São Francisco. Como todos nós, Riley é guiada pelas suas emoções: Alegria, Medo, Raiva, Repulsa e Tristeza. As emoções vivem no Quartel-general, o centro de controlo da mente de Riley, onde ajudam a encaminhá-la no dia a dia. Apesar de Alegria, a emoção principal e mais importante de Riley, tentar manter tudo positivo, as emoções entram em conflito sobre como navegar por uma nova cidade, uma nova casa e uma nova escola.',
-                            tags: [
-                                { id: '1', name: "animação"},
-                                { id: '2', name: "drama"}
-                            ]
-                        }} 
-
+                    { 
+                        notes.map(note =>(
+                        <Note 
+                            key={String(note.id)}
+                            data={note} 
+                            onClick={() => handleDetails(note.id)}
                         />
-                </Link>
-
-                    <Note data={{ 
-                        title: 'Divertidamente',
-
-                        description: 'Crescer pode ser um desafio, e não é exceção para Riley, que é arrancada da sua vida no Minnesota quando o pai arranja um novo emprego em São Francisco. Como todos nós, Riley é guiada pelas suas emoções: Alegria, Medo, Raiva, Repulsa e Tristeza. As emoções vivem no Quartel-general, o centro de controlo da mente de Riley, onde ajudam a encaminhá-la no dia a dia. Apesar de Alegria, a emoção principal e mais importante de Riley, tentar manter tudo positivo, as emoções entram em conflito sobre como navegar por uma nova cidade, uma nova casa e uma nova escola.',
-                        tags: [
-                            { id: '1', name: "animação"},
-                            { id: '2', name: "drama"}
-                        ]
-                    }} 
-
-                    />
+                        ))
+                    }
+        
                
             </Content>
 

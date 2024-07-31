@@ -1,17 +1,21 @@
 import { Container } from "./styles";
-import Star from "../../assets/Star.svg";
-import EmptyStar from "../../assets/emptyStar.svg";
+import star from "../../assets/star.svg";
+import emptyStar from "../../assets/emptyStar.svg"; // Adicione uma estrela cinza para as não selecionadas
 
-export function Stars(){
-    return(
+export function Stars({ rating }) {
+    const stars = Array.from({ length: 5 }, (_, index) => (
+        <img 
+            key={index} 
+            src={index < rating ? star : emptyStar} 
+            alt="estrela" 
+        />
+    ));
+
+    return (
         <Container>
             <div>
-                <img id="star" src={Star} alt="estrela" />
-                <img id="star" src={Star} alt="estrela" />
-                <img id="star" src={Star} alt="estrela" />
-                <img id="star" src={Star} alt="estrela" />
-                <img id="star" src={EmptyStar} alt="estrela" />
+                {stars}
             </div>
-        </Container>
-    )
+        </Container> 
+    );
 }

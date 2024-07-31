@@ -1,14 +1,49 @@
+import { useState, useEffect } from "react";
 import { Container, Content } from "./styles";
+import { useParams } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
+import { useNavigate } from "react-router-dom";
+
+import { api } from "../../services/api";
+import  avatarPlaceHolder  from "../../assets/avatar_placeholder.jpg";
 
 import { Tag } from '../../components/Tag';
 import { Header } from '../../components/Header';
 import { ButtonText } from '../../components/ButtonText';
 import { Link } from "react-router-dom"
 import { FiArrowLeft } from "react-icons/fi"
-import {Stars} from ".././../components/Stars";
 import { LuClock4 } from "react-icons/lu";
+import { Stars } from "../../components/Stars";
 
 export function Details() {
+  const [data, setData] = useState(null);
+  const params = useParams();
+  const { user } = useAuth();
+
+  const  avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceHolder;
+  const navigate = useNavigate();
+
+  function handleBack(){
+    navigate(-1);
+  }
+
+  async function handleRemove(){
+    const confirm = window.confirm("Deseja realmente excluir a nota?");
+
+    if(confirm){
+      await api.delete(`/notes/${params.id}`);
+      navigate (-1);
+    }
+  }
+
+  useEffect(() => {
+    async function fetchNote(){
+      const response = await api.get(`/notes/${params.id}`);
+      setData(response.data);
+    }
+
+    fetchNote();
+  }, [])
 
   return (
 
@@ -16,55 +51,66 @@ export function Details() {
       <Header/>
       <div class="custom-scrollbar">
 
+    {
+      data &&
       <main>
         <Content>
             <div className="command">
-                <Link to="/">
+                <Link 
+                  onClick={handleBack}
+                >
                   <FiArrowLeft/>
                     Voltar
                 </Link>
 
-                <ButtonText title="Excluir nota"/>
+                <ButtonText 
+                    title="Excluir nota"
+                    onClick={handleRemove}
+                  />
             </div>
               
 
                 <div class="head">
-                  <h1>Divertida Mente</h1>
-                  <Stars/>
+                  <h1>{data.title}</h1>
+                  <Stars rating={data.rating}/>
                 </div>
 
                 <div className="details"> 
                   <div id="perfil">
-                    <img src="https://github.com/livialausch.png" alt="foto perfil" />
+                    <img 
+                        src={avatarUrl}
+                        alt={user.name}
+                      />
                   </div>
-                  <p>Por Livia Lausch</p>
+                  <p>Por &nbsp; <span>{user.name}</span></p>
                   <span> 
                     <LuClock4/> 
-                    <p>23/05/22 às 08:00</p>
+                    <p>{new Date(data.created_at).toLocaleDateString('pt-br')}</p>
                   </span>
                 </div>
-
+              {
+                data.tags &&
                 <div className="tags">
-                  <Tag title="animação"/>
-                  <Tag title="infantil"/>
-                  <Tag title="comédia dramatica"/>
+                { 
+                  data.tags.map(tag => (
+                  <Tag 
+                    key={String(tag.id)}
+                    title={tag.name}
+                  />
+                ))
+                }
                 </div>
+              }
 
                 <p>
-                  Riley é uma garota divertida de 11 anos de idade, que deve enfrentar mudanças 
-                  importantes em sua vida quando seus pais decidem deixar a sua cidade natal, 
-                  no estado de Minnesota, para viver em San Francisco. Dentro do cérebro de Riley, 
-                  convivem várias emoções diferentes, como a Alegria, o Medo, a Raiva, o Nojinho e a Tristeza. 
-                  A líder deles é Alegria, que se esforça bastante para fazer com que a vida de Riley seja sempre feliz. 
-                  Entretanto, uma confusão na sala de controle faz com que ela e Tristeza sejam expelidas para fora do local. 
-                  Agora, elas precisam percorrer as várias ilhas existentes nos pensamentos de Riley para que possam 
-                  retornar à sala de controle - e, enquanto isto não acontece, a vida da garota muda radicalmente.
+                 {data.description}
                 </p>
 
 
 
         </Content>
       </main>
+    }
      
   </div>
     </Container>

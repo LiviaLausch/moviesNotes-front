@@ -12,8 +12,10 @@ export const Container = styled.div`
         align-items: center;
         padding: 124px;
 
-        a {
+        button {
             color: ${({ theme }) => theme.COLORS.ORANGE};
+            background: none;
+            border: none;
             display: flex;
             align-items: center;
             justify-content: center;

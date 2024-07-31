@@ -11,12 +11,16 @@ export const Container = styled.button`
     padding: 22px;
     margin-bottom: 24px;
 
-    > h1 {
-        flex: 1;
-        text-align: left;
-        font-weight: 700;
-        font-size: 24px;
-        color: ${({ theme}) => theme.COLORS.WHITE};
+    > .title {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+         h1 {
+            font-weight: 700;
+            font-size: 24px;
+            color: ${({ theme}) => theme.COLORS.WHITE};
+        }
     }
 
     > p {

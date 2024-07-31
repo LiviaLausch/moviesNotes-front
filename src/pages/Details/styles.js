@@ -102,18 +102,5 @@ export const Content = styled.div`
         text-align: justify;
 }
 
-> content::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
-
-> content::-webkit-scrollbar-track {
-  background: orange;        /* color of the tracking area */
-}
-
-> content::-webkit-scrollbar-thumb {
-  background-color: blue;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid orange;  /* creates padding around scroll thumb */
-}
 
 `;

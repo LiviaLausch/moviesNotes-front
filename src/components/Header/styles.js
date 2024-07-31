@@ -3,50 +3,29 @@ import styled from "styled-components";
 
 export const Container = styled.header`
     height: 105px;
-    width: 100%;
-    margin-top: 10px;
-
+    padding: 20px;
     
     border-bottom: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_700};
-    gap: 64px;
-    
-    padding: 0 8px;
-
 `;
 
 export const  Brand = styled.div`
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
 
     > h1{
-        font-size: 24px;
+        font-size: 34px;
         color: ${({theme}) => theme.COLORS.ORANGE};
     }
 `; 
 
-export const  Search = styled.div`
-    padding: 10px;
-
-     input {
-        min-width: 600px;
-    }
-`;  
-
 export const Profile = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 60px;
-    
+    justify-content: space-between;
+    margin-inline-end: 100px;
+    margin-inline-start: 100px;
+    gap: 100px;
     
      #prof {
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-right: -50px;
         gap: 10px;
 
         > div {
