@@ -18,7 +18,7 @@ export function Home(){
     const [tagsSelected, setTagsSelected] = useState([]);
     const [notes, setNotes] = useState([]);
     
-    const { user } = useAuth();
+    const {user} = useAuth();
     const navigate = useNavigate();
 
 
@@ -33,9 +33,9 @@ export function Home(){
                 setNotes(response.data);
             }
         }
-
         fetchNotes();
-
+        return () => setNotes([])
+        
     }, [tagsSelected, search, user]);
 
 
