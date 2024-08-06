@@ -12,7 +12,6 @@ export function Header(){
     const navigation = useNavigate();
 
     function handleSingOut(){
-        navigation(-1);
         singOut();
     }
 
