@@ -12,6 +12,7 @@ export function Header(){
     const navigation = useNavigate();
 
     function handleSingOut(){
+        navigation(-1);
         singOut();
     }
 
@@ -19,12 +20,12 @@ export function Header(){
 
     return(
         <Container>
-            <Profile to="/profile">
             <Brand>
                 <h1>MoviesNotes</h1>
             </Brand>
 
             
+            <Profile to="/profile">
                 <div id="prof">
                     <div>
                         <Link to="/profile"> 

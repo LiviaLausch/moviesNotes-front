@@ -1,15 +1,16 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.button`
     width: 100%;
-    background-color: ${({ theme }) => theme.COLORS.ORANGE};
+    background-color: ${({ theme }) => theme.COLORS.PINK};
     color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
 
-    height: 56px;
-    border: 0;
-    padding: 0 16px;
-    margin-top: 16px;
-    border-radius: 10px;
+    border: none;
+    padding: 0 1rem;
+    margin-top: 1rem;
+    border-radius: 0.62rem;
+    padding: 1rem;
 
     font-weight: 500;
 

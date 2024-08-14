@@ -130,7 +130,10 @@ export function New(){
                     
 
                     <div id="buttons-new">
-                        <button id="delete">Excluir filme</button>
+                        <Button 
+                            title="Excluir nota"
+                            onClick={handleBack}
+                        />
                         <Button 
                             title="Salvar alterações" 
                             onClick={handleNewNote}

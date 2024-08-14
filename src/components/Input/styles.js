@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
     width: 100%;
@@ -11,7 +12,7 @@ export const Container = styled.div`
     border-radius: 10px;
 
     > input {
-        height: 56px;
+        height: 3.5rem;
         width: 100%;
 
         padding: 12px;
@@ -29,5 +30,7 @@ export const Container = styled.div`
     svg {
             margin-left: 16px;
         }
+
+
     
 `;

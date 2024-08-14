@@ -23,15 +23,15 @@ export const Container = styled.div`
     }
 
     .button-add {
-        color: ${({ theme }) => theme.COLORS.ORANGE};
+        color: ${({ theme }) => theme.COLORS.PINK};
     }
 
 
     > input {
-        height: 56px;
+        height: 3.5rem;
         width: 100%;
 
-        padding: 12px;
+        padding: 0.75rem;
 
         color: ${({ theme, isNew }) => isNew ? `${theme.COLORS.GRAY_300}` : `${theme.COLORS.WHITE}`};
         background: transparent;
