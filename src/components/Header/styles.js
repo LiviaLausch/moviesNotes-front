@@ -8,13 +8,18 @@ export const Container = styled.header`
     padding: 1.25rem;
     display: flex;
     align-items: center;
+    gap: 35rem;
     justify-content: center;
-    gap: 24rem;
     border-bottom: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_700};
+
 
     @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
         padding: 0.8rem;
-        gap: 1.8rem;
+        gap: 8rem;
+    }
+     
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        gap: 84rem;
     }
 `;
 
